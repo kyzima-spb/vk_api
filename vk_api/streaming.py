@@ -14,7 +14,7 @@ import json
 class VkStreaming(object):
     """ Класс для работы с Streaming API
 
-    `Подробнее в документации VK API <https://vk.com/dev/streaming_api_docs>`__.
+    `Подробнее в документации VK API <https://vk.ru/dev/streaming_api_docs>`__.
 
     :param vk: объект :class:`VkApi`
     """

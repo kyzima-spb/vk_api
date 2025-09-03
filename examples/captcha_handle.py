@@ -17,7 +17,7 @@ def captcha_handler(captcha):
 def main():
     """ Пример обработки капчи """
 
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(
         login, password,
         captcha_handler=captcha_handler  # функция для обработки капчи

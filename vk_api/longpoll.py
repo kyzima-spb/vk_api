@@ -19,7 +19,7 @@ class VkLongpollMode(IntEnum):
     """ Дополнительные опции ответа
 
     `Подробнее в документации VK API
-    <https://vk.com/dev/using_longpoll?f=1.+Подключение>`_
+    <https://vk.ru/dev/using_longpoll?f=1.+Подключение>`_
     """
 
     #: Получать вложения
@@ -46,7 +46,7 @@ class VkEventType(IntEnum):
     """ Перечисление событий, получаемых от longpoll-сервера.
 
     `Подробнее в документации VK API
-    <https://vk.com/dev/using_longpoll?f=3.+Структура+событий>`__
+    <https://vk.ru/dev/using_longpoll?f=3.+Структура+событий>`__
     """
 
     #: Замена флагов сообщения (FLAGS:=$flags)
@@ -319,7 +319,7 @@ class Event(object):
     """ Событие, полученное от longpoll-сервера.
 
     Имеет поля в соответствии с `документацией
-    <https://vk.com/dev/using_longpoll_2?f=3.%2BСтруктура%2Bсобытий>`_.
+    <https://vk.ru/dev/using_longpoll_2?f=3.%2BСтруктура%2Bсобытий>`_.
 
     События `MESSAGE_NEW` и `MESSAGE_EDIT` имеют (среди прочих) такие поля:
         - `text` - `экранированный <https://ru.wikipedia.org/wiki/Мнемоники_в_HTML>`_ текст
@@ -466,7 +466,7 @@ class Event(object):
 class VkLongPoll(object):
     """ Класс для работы с longpoll-сервером
 
-    `Подробнее в документации VK API <https://vk.com/dev/using_longpoll>`__.
+    `Подробнее в документации VK API <https://vk.ru/dev/using_longpoll>`__.
 
     :param vk: объект :class:`VkApi`
     :param wait: время ожидания

@@ -5,7 +5,7 @@ import vk_api
 def main():
     """ Пример получения последнего сообщения со стены """
 
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(login, password)
 
     try:
@@ -17,7 +17,7 @@ def main():
     vk = vk_session.get_api()
 
     """ VkApi.method позволяет выполнять запросы к API. В этом примере
-        используется метод wall.get (https://vk.com/dev/wall.get) с параметром
+        используется метод wall.get (https://vk.ru/dev/wall.get) с параметром
         count = 1, т.е. мы получаем один последний пост со стены текущего
         пользователя.
     """

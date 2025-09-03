@@ -7,7 +7,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 Пример не работает с дефолтным app_id
 
 Подробнее об ограничении доступа к сообщениям:
-https://vk.com/dev/messages_api
+https://vk.ru/dev/messages_api
 
 Обсуждение:
 https://github.com/python273/vk_api/issues/219
@@ -17,11 +17,11 @@ https://github.com/python273/vk_api/issues/219
 def main():
     """ Пример использования longpoll
 
-        https://vk.com/dev/using_longpoll
-        https://vk.com/dev/using_longpoll_2
+        https://vk.ru/dev/using_longpoll
+        https://vk.ru/dev/using_longpoll_2
     """
 
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(login, password)
 
     try:

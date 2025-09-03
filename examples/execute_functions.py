@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ Пример использования VkFunction - обертки над методом execute
 
-    Описание VKScript (языка execute): https://vk.com/dev/execute
+    Описание VKScript (языка execute): https://vk.ru/dev/execute
 """
 
 import vk_api
@@ -26,7 +26,7 @@ vk_get_filtered = VkFunction(
 
 
 def main():
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(login, password)
 
     try:

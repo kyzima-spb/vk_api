@@ -30,7 +30,7 @@ class WebLoginCredentials:
     нужные для процесса аутентификации и авторизации пользователя.
     """
 
-    SIGNIN_URL = 'https://m.vk.com/join?vkid_auth_type=sign_in'
+    SIGNIN_URL = 'https://m.vk.ru/join?vkid_auth_type=sign_in'
     DEFAULT_COOKIES = [
         {  # если не установлено, то не будет редирект на страницу с данными аутентификации
             'version': 0,
@@ -38,7 +38,7 @@ class WebLoginCredentials:
             'value': '1920/1080/2/!!-!!!!',
             'port': None,
             'port_specified': False,
-            'domain': '.vk.com',
+            'domain': '.vk.ru',
             'domain_specified': True,
             'domain_initial_dot': True,
             'path': '/',

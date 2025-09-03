@@ -181,7 +181,7 @@ class VkBotMessageEvent(VkBotEvent):
 class VkBotLongPoll(object):
     """ Класс для работы с Bots Long Poll сервером
 
-    `Подробнее в документации VK API <https://vk.com/dev/bots_longpoll>`__.
+    `Подробнее в документации VK API <https://vk.ru/dev/bots_longpoll>`__.
 
     :param vk: объект :class:`VkApi`
     :param group_id: id группы

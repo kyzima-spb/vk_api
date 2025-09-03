@@ -88,7 +88,7 @@ class VkApi(object):
     :type scope: int or str
 
     :param client_secret: Защищенный ключ приложения для Client Credentials Flow
-        авторизации приложения (https://vk.com/dev/client_cred_flow).
+        авторизации приложения (https://vk.ru/dev/client_cred_flow).
         Внимание: Этот способ авторизации устарел, рекомендуется использовать
         сервисный ключ из настроек приложения.
 
@@ -141,10 +141,10 @@ class VkApi(object):
     @property
     def _sid(self):
         return (
-            self.http.cookies.get('remixsid', domain='.vk.com') or
-            self.http.cookies.get('remixsid6', domain='.vk.com') or
             self.http.cookies.get('remixsid', domain='.vk.ru') or
-            self.http.cookies.get('remixsid6', domain='.vk.ru')
+            self.http.cookies.get('remixsid6', domain='.vk.ru') or
+            self.http.cookies.get('remixsid', domain='.vk.com') or
+            self.http.cookies.get('remixsid6', domain='.vk.com')
         )
 
     def auth(self, reauth=False, token_only=False):
@@ -232,7 +232,7 @@ class VkApi(object):
             self._api_login()
 
     def _check_challenge(self, response):
-        if not response.url.startswith('https://vk.com/challenge.html?'):
+        if not response.url.startswith('https://vk.ru/challenge.html?'):
             return response
 
         hash429 = urllib.parse.parse_qs(response.url.split('?', 1)[-1])['hash429'][0]
@@ -256,9 +256,9 @@ class VkApi(object):
         self.http.cookies.clear()
 
         # Get cookies
-        response = self.http.get('https://vk.com/')
+        response = self.http.get('https://vk.ru/')
 
-        if response.url.startswith('https://vk.com/429.html?'):
+        if response.url.startswith('https://vk.ru/429.html?'):
             # is this version still used???
             hash429_md5 = md5(self.http.cookies['hash429'].encode('ascii')).hexdigest()
             self.http.cookies.pop('hash429')
@@ -326,8 +326,8 @@ class VkApi(object):
             },
             headers={
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'origin': 'https://id.vk.com',
-                'referer': 'https://id.vk.com/',
+                'origin': 'https://id.vk.ru',
+                'referer': 'https://id.vk.ru/',
             },
         )
 
@@ -361,9 +361,9 @@ class VkApi(object):
         headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
             'Accept-Language': 'en-US,en;q=0.5',
-            'Referer': 'https://vk.com/',
+            'Referer': 'https://vk.ru/',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Origin': 'https://vk.com',
+            'Origin': 'https://vk.ru',
         }
 
         for _ in range(16):
@@ -375,7 +375,7 @@ class VkApi(object):
                 'recaptcha': '',
                 'captcha_sid': '',
                 'captcha_key': '',
-                '_origin': 'https://vk.com',
+                '_origin': 'https://vk.ru',
                 'utf8': '1',
                 'ip_h': search_re(RE_LOGIN_IP_H, response.text),
                 'lg_domain_h': search_re(RE_LOGIN_LG_DOMAIN_H, response.text),
@@ -390,10 +390,10 @@ class VkApi(object):
                 values['captcha_key'] = captcha_key
 
             response = self.http.post(
-                'https://login.vk.com/?act=login', data=values, headers=headers)
+                'https://login.vk.ru/?act=login', data=values, headers=headers)
             if 'onLoginFailed(7,' in response.text:
                 self.http.cookies.clear()
-                response = self.http.get('https://vk.com/')
+                response = self.http.get('https://vk.ru/')
                 time.sleep(0.2)
                 continue
             if 'onLoginDone(' in response.text:
@@ -424,7 +424,7 @@ class VkApi(object):
         if 'act=authcheck' in response.text:
             self.logger.info('2FA is required')
 
-            response = self.http.get('https://vk.com/login?act=authcheck')
+            response = self.http.get('https://vk.ru/login?act=authcheck')
 
             self._pass_twofactor(response)
 
@@ -540,7 +540,7 @@ class VkApi(object):
             values['captcha_key'] = captcha_key
 
         response = self.http.post(
-            'https://vk.com/al_login.php?act=a_authcheck_code', values)
+            'https://vk.ru/al_login.php?act=a_authcheck_code', values)
         data = json.loads(response.text.lstrip('<!--'))
         status = data['payload'][0]
 
@@ -573,7 +573,7 @@ class VkApi(object):
         self.logger.info('Checking security check request')
 
         if response is None:
-            response = self.http.get('https://vk.com/settings')
+            response = self.http.get('https://vk.ru/settings')
 
         if 'security_check' not in response.url:
             self.logger.info('Security check is not required')
@@ -599,7 +599,7 @@ class VkApi(object):
                 'to': ''
             }
 
-            response = self.http.post('https://vk.com/login.php', values)
+            response = self.http.post('https://vk.ru/login.php', values)
 
             if response.text.split('<!>')[4] == '4':
                 return response
@@ -618,7 +618,7 @@ class VkApi(object):
             self.logger.info('No remixsid')
             return
 
-        feed_url = 'https://vk.com/feed.php'
+        feed_url = 'https://vk.ru/feed.php'
         response = self.http.get(feed_url)
 
         if response.url != feed_url:
@@ -634,11 +634,11 @@ class VkApi(object):
         if not self._sid:
             raise AuthError('API auth error (no remixsid)')
 
-        if not self.http.cookies.get('p', domain='.login.vk.com'):
+        if not self.http.cookies.get('p', domain='.login.vk.ru'):
             raise AuthError('API auth error (no login cookies)')
 
         response = self.http.get(
-            'https://oauth.vk.com/authorize',
+            'https://oauth.vk.ru/authorize',
             params={
                 'client_id': self.app_id,
                 'scope': self.scope,
@@ -657,7 +657,7 @@ class VkApi(object):
                 auth_json = json.loads(search_re(RE_AUTH_TOKEN_URL, response.text))
                 return_auth_hash = auth_json['data']['hash']['return_auth']
                 response = self.http.post(
-                    'https://login.vk.com/?act=connect_internal',
+                    'https://login.vk.ru/?act=connect_internal',
                     {
                         'uuid': '',
                         'service_group': '',
@@ -665,7 +665,7 @@ class VkApi(object):
                         'version': 1,
                         'app_id': self.app_id,
                     },
-                    headers={'Origin': 'https://id.vk.com'}
+                    headers={'Origin': 'https://id.vk.ru'}
                 )
                 connect_data = response.json()
                 if connect_data['type'] != 'okay':
@@ -673,7 +673,7 @@ class VkApi(object):
                 auth_token = connect_data['data']['access_token']
                 auth_user_hash = connect_data['data']['auth_user_hash']
                 response = self.http.post(
-                    'https://api.vk.com/method/auth.getOauthToken',
+                    'https://api.vk.ru/method/auth.getOauthToken',
                     {
                         'hash': return_auth_hash,
                         'auth_user_hash': auth_user_hash,
@@ -727,13 +727,13 @@ class VkApi(object):
 
             self.logger.info('Got access_token')
 
-        elif 'oauth.vk.com/error' in response.url:
+        elif 'oauth.vk.ru/error' in response.url:
             error_data = response.json()
 
             error_text = error_data.get('error_description')
 
             # Deletes confusing error text
-            if error_text and '@vk.com' in error_text:
+            if error_text and '@vk.ru' in error_text:
                 error_text = error_data.get('error')
 
             raise AuthError(f'API auth error: {error_text}')
@@ -751,7 +751,7 @@ class VkApi(object):
         }
 
         response = self.http.post(
-            'https://oauth.vk.com/access_token', values
+            'https://oauth.vk.ru/access_token', values
         ).json()
 
         if 'error' in response:
@@ -770,7 +770,7 @@ class VkApi(object):
         }
 
         response = self.http.post(
-            'https://oauth.vk.com/access_token', values
+            'https://oauth.vk.ru/access_token', values
         ).json()
 
         if 'error' in response:
@@ -791,7 +791,7 @@ class VkApi(object):
             return True
 
     def captcha_handler(self, captcha):
-        """ Обработчик капчи (http://vk.com/dev/captcha_error)
+        """ Обработчик капчи (http://vk.ru/dev/captcha_error)
 
         :param captcha: объект исключения `Captcha`
         """
@@ -800,7 +800,7 @@ class VkApi(object):
 
     def need_validation_handler(self, error):
         """ Обработчик проверки безопасности при запросе API
-            (http://vk.com/dev/need_validation)
+            (http://vk.ru/dev/need_validation)
 
         :param error: исключение
         """
@@ -895,7 +895,7 @@ class VkApi(object):
                 time.sleep(delay)
 
             response = self.http.post(
-                f'https://api.vk.com/method/{method}',
+                f'https://api.vk.ru/method/{method}',
                 values,
                 headers=None if with_cookies else {'Cookie': ''},
             )
@@ -944,7 +944,7 @@ class VkApi(object):
         captcha_key: t.Optional[str] = None,
     ) -> t.Dict[str, t.Any]:
         """
-        Вызов действия для https://login.vk.com с обработкой капчи.
+        Вызов действия для https://login.vk.ru с обработкой капчи.
 
         :param action: имя действия, например, connect_authorize или connect_internal
         :type action: str
@@ -967,7 +967,7 @@ class VkApi(object):
             values['captcha_key'] = captcha_key
 
         response = self.http.post(
-            url=f'https://login.vk.com/?act={action}',
+            url=f'https://login.vk.ru/?act={action}',
             data=values,
             headers=headers,
         )

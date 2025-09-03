@@ -5,7 +5,7 @@ import vk_api
 def main():
     """ Пример загрузки фото """
 
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(login, password)
 
     try:
@@ -25,7 +25,7 @@ def main():
         group_id=74030368
     )
 
-    vk_photo_url = f"https://vk.com/photo{photo[0]['owner_id']}_{photo[0]['id']}"
+    vk_photo_url = f"https://vk.ru/photo{photo[0]['owner_id']}_{photo[0]['id']}"
 
     print(photo, '\nLink: ', vk_photo_url)
 

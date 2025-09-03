@@ -17,7 +17,7 @@ def auth_handler():
 def main():
     """ Пример обработки двухфакторной аутентификации """
 
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(
         login, password,
         # функция для обработки двухфакторной аутентификации

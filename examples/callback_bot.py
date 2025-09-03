@@ -7,7 +7,7 @@ from vk_api.utils import get_random_id
 Пример бота для группы ВКонтакте использующего
 callback-api для получения сообщений.
 
-Подробнее: https://vk.com/dev/callback_api
+Подробнее: https://vk.ru/dev/callback_api
 
 Перед запуском необходимо установить flask (pip install flask)
 Запуск:

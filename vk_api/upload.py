@@ -20,7 +20,7 @@ STORY_ALLOWED_LINK_TEXTS = {
 
 
 class VkUpload(object):
-    """ Загрузка файлов через API (https://vk.com/dev/upload_files)
+    """ Загрузка файлов через API (https://vk.ru/dev/upload_files)
 
     :param vk: объект :class:`VkApi` или :class:`VkApiMethod`
     """
@@ -103,7 +103,7 @@ class VkUpload(object):
         :type photo: str
 
         :param image_type: тип изображиения в зависимости от выбранного виджета
-        (https://vk.com/dev/appWidgets.getGroupImageUploadServer)
+        (https://vk.ru/dev/appWidgets.getGroupImageUploadServer)
         :type image_type: str
         """
 
@@ -329,12 +329,12 @@ class VkUpload(object):
         :type album_id: int
 
         :param privacy_view: настройки приватности просмотра видеозаписи в
-            специальном формате. (https://vk.com/dev/objects/privacy)
+            специальном формате. (https://vk.ru/dev/objects/privacy)
             Приватность доступна для видеозаписей, которые пользователь
             загрузил в профиль. (список слов, разделенных через запятую)
         :param privacy_comment: настройки приватности комментирования
             видеозаписи в специальном формате.
-            (https://vk.com/dev/objects/privacy)
+            (https://vk.ru/dev/objects/privacy)
 
         :param no_comments: 1 — закрыть комментарии (для видео из сообществ).
         :type no_comments: bool
@@ -567,9 +567,9 @@ class VkUpload(object):
         if link_text and link_text not in STORY_ALLOWED_LINK_TEXTS:
             raise ValueError('Invalid link_text')
 
-        if link_url and not link_url.startswith('https://vk.com'):
+        if link_url and not link_url.startswith('https://vk.ru'):
             raise ValueError(
-                'Only internal https://vk.com links are allowed for link_url'
+                'Only internal https://vk.ru links are allowed for link_url'
             )
 
         if link_url and len(link_url) > 2048:

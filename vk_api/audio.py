@@ -47,7 +47,7 @@ class VkAudio(object):
             'value': '0',
             'port': None,
             'port_specified': False,
-            'domain': '.vk.com',
+            'domain': '.vk.ru',
             'domain_specified': True,
             'domain_initial_dot': True,
             'path': '/',
@@ -65,7 +65,7 @@ class VkAudio(object):
             'value': '1920/1080/2/!!-!!!!',
             'port': None,
             'port_specified': False,
-            'domain': '.vk.com',
+            'domain': '.vk.ru',
             'domain_specified': True,
             'domain_initial_dot': True,
             'path': '/',
@@ -87,7 +87,7 @@ class VkAudio(object):
 
         set_cookies_from_list(self._vk.http.cookies, self.DEFAULT_COOKIES)
 
-        self._vk.http.get('https://m.vk.com/')  # load cookies
+        self._vk.http.get('https://m.vk.ru/')  # load cookies
 
     def get_iter(self, owner_id=None, album_id=None, access_hash=None):
         """ Получить список аудиозаписей пользователя (по частям)
@@ -108,7 +108,7 @@ class VkAudio(object):
         offset = 0
         while True:
             response = self._vk.http.post(
-                'https://m.vk.com/audio',
+                'https://m.vk.ru/audio',
                 data={
                     'act': 'load_section',
                     'owner_id': owner_id,
@@ -167,7 +167,7 @@ class VkAudio(object):
 
         while True:
             response = self._vk.http.get(
-                f'https://m.vk.com/audio?act=audio_playlists{owner_id}',
+                f'https://m.vk.ru/audio?act=audio_playlists{owner_id}',
                 params={'offset': offset},
                 allow_redirects=False,
             )
@@ -204,7 +204,7 @@ class VkAudio(object):
             owner_id = self.user_id
 
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'section',
@@ -251,7 +251,7 @@ class VkAudio(object):
         :param genre: жанр аудиозаписи
         """
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'edit_audio',
@@ -274,7 +274,7 @@ class VkAudio(object):
         :param group_id: ID группы, для юзера - 0
         """
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'new_audio',
@@ -286,7 +286,7 @@ class VkAudio(object):
         with FilesOpener(audio, key_format='file') as f:
             uploader_response = self._vk.http.post(url, files=f).json()
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'done_add',
@@ -315,7 +315,7 @@ class VkAudio(object):
         offset_left = 0
 
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'section',
@@ -350,7 +350,7 @@ class VkAudio(object):
             offset_left += len(ids)
 
             response = self._vk.http.post(
-                'https://vk.com/al_audio.php',
+                'https://vk.ru/al_audio.php',
                 data={
                     'al': 1,
                     'act': 'load_catalog_section',
@@ -364,7 +364,7 @@ class VkAudio(object):
         """ Искать обновления друзей (генератор) """
 
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'section',
@@ -395,7 +395,7 @@ class VkAudio(object):
                 break
 
             response = self._vk.http.post(
-                'https://vk.com/al_audio.php',
+                'https://vk.ru/al_audio.php',
                 data={
                     'al': 1,
                     'act': 'load_catalog_section',
@@ -412,7 +412,7 @@ class VkAudio(object):
         """
 
         response = self._vk.http.post(
-            'https://vk.com/audio',
+            'https://vk.ru/audio',
             data={
                 'block': 'chart',
                 'section': 'recoms'
@@ -440,7 +440,7 @@ class VkAudio(object):
         offset_left = 0
 
         response = self._vk.http.post(
-            'https://vk.com/audio',
+            'https://vk.ru/audio',
             data={
                 'block': 'new_songs',
                 'section': 'recoms'
@@ -463,7 +463,7 @@ class VkAudio(object):
 
         while True:
             response = self._vk.http.post(
-                'https://vk.com/al_audio.php',
+                'https://vk.ru/al_audio.php',
                 data={
                     'al': 1,
                     'act': 'load_catalog_section',
@@ -496,7 +496,7 @@ class VkAudio(object):
         :param audio_id: ID аудио
         """
         response = self._vk.http.get(
-            f'https://m.vk.com/audio{owner_id}_{audio_id}', allow_redirects=False
+            f'https://m.vk.ru/audio{owner_id}_{audio_id}', allow_redirects=False
         )
 
         ids = scrap_ids_from_html(
@@ -521,7 +521,7 @@ class VkAudio(object):
         :param owner_id: ID владельца (отрицательные значения для групп)
         :param post_id: ID поста
         """
-        response = self._vk.http.get(f'https://m.vk.com/wall{owner_id}_{post_id}')
+        response = self._vk.http.get(f'https://m.vk.ru/wall{owner_id}_{post_id}')
 
         ids = scrap_ids_from_html(
             response.text,
@@ -536,7 +536,7 @@ class VkAudio(object):
         )
 
     def follow_user(self, user_id):
-        data = self._vk.http.get(f"https://vk.com/audios{user_id}")
+        data = self._vk.http.get(f"https://vk.ru/audios{user_id}")
 
         user_hash = RE_USER_AUDIO_HASH.search(data.text)
         if user_hash is None:
@@ -544,7 +544,7 @@ class VkAudio(object):
         user_hash = user_hash.groups()[1]
 
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'follow_owner',
@@ -555,7 +555,7 @@ class VkAudio(object):
         return json.loads(response.text.replace('<!--', ''))
     
     def unfollow_user(self, user_id):
-        data = self._vk.http.get(f"https://vk.com/audios{user_id}")
+        data = self._vk.http.get(f"https://vk.ru/audios{user_id}")
 
         user_hash = RE_USER_AUDIO_HASH.search(data.text)
         if user_hash is None:
@@ -563,7 +563,7 @@ class VkAudio(object):
         user_hash = user_hash.groups()[1]
 
         response = self._vk.http.post(
-            'https://vk.com/al_audio.php',
+            'https://vk.ru/al_audio.php',
             data={
                 'al': 1,
                 'act': 'unfollow_owner',
@@ -657,7 +657,7 @@ def scrap_tracks(ids, user_id, http, convert_m3u8_links=True):
             time.sleep(delay)
 
         result = http.post(
-            'https://m.vk.com/audio',
+            'https://m.vk.ru/audio',
             data={'act': 'reload_audio', 'ids': ','.join(['_'.join(i) for i in ids_group])},
             headers={"X-Requested-With": "XMLHttpRequest"},
         ).json()
@@ -712,7 +712,7 @@ def scrap_albums(html):
         albums.append({
             'id': full_id[1],
             'owner_id': full_id[0],
-            'url': 'https://m.vk.com/audio?act=audio_playlist{}_{}'.format(
+            'url': 'https://m.vk.ru/audio?act=audio_playlist{}_{}'.format(
                 *full_id
             ),
             'access_hash': access_hash.group(1) if access_hash else None,

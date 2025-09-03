@@ -6,7 +6,7 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 def main():
     """ Пример использования bots longpoll
 
-        https://vk.com/dev/bots_longpoll
+        https://vk.ru/dev/bots_longpoll
     """
 
     vk_session = vk_api.VkApi(token='your_group_token')

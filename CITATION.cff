@@ -12,8 +12,9 @@ repository-code: 'https://github.com/python273/vk_api'
 repository-artifact: 'https://pypi.org/project/vk-api/'
 abstract: >-
   Python модуль для создания скриптов для социальной сети
-  Вконтакте (vk.com API wrapper)
+  Вконтакте (vk.ru API wrapper)
 keywords:
+  - vk.ru
   - vk.com
   - vkontakte
   - python

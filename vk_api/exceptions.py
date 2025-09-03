@@ -127,7 +127,7 @@ class Captcha(VkApiError):
         """ Получить ссылку на изображение капчи """
 
         if not self.url:
-            self.url = f'https://api.vk.com/captcha.php?sid={self.sid}'
+            self.url = f'https://api.vk.ru/captcha.php?sid={self.sid}'
 
         return self.url
 

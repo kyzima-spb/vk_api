@@ -23,7 +23,7 @@ setup(
     author_email='vk_api@python273.pw',
     description=(
         'Python модуль для создания скриптов для социальной сети '
-        'Вконтакте (vk.com API wrapper)'
+        'Вконтакте (vk.ru API wrapper)'
     ),
     long_description=long_description,
     long_description_content_type='text/markdown',

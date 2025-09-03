@@ -37,7 +37,7 @@ def main():
     keyboard_1.add_callback_button(
         label="Откртыть Url",
         color=VkKeyboardColor.POSITIVE,
-        payload={"type": "open_link", "link": "https://vk.com/dev/bots_docs_5"},
+        payload={"type": "open_link", "link": "https://vk.ru/dev/bots_docs_5"},
     )
     keyboard_1.add_line()
     keyboard_1.add_callback_button(

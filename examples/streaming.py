@@ -5,7 +5,7 @@ from vk_api.streaming import VkStreaming
 
 def main():
     """ Пример использования streaming
-	    https://vk.com/dev/streaming_api_docs
+	    https://vk.ru/dev/streaming_api_docs
     """
     vk = vk_api.VkApi(token=<Сервисный ключ доступа>)
     streaming = VkStreaming(vk)

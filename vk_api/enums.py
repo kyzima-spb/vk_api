@@ -37,7 +37,7 @@ class VkUserPermissions(enum.IntEnum):
     """
     Перечисление прав пользователя.
     Список прав получается побитовым сложением (x | y) каждого права.
-    Подробнее в документации VK API: https://vk.com/dev/permissions
+    Подробнее в документации VK API: https://vk.ru/dev/permissions
     """
 
     #: Пользователь разрешил отправлять ему уведомления

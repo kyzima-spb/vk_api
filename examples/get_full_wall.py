@@ -5,7 +5,7 @@ import vk_api
 def main():
     """ Пример получения всех постов со стены """
 
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(login, password)
 
     try:

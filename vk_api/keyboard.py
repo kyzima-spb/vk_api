@@ -55,7 +55,7 @@ class VkKeyboardButton(Enum):
 
 
 class VkKeyboard(object):
-    """ Класс для создания клавиатуры для бота (https://vk.com/dev/bots_docs_3)
+    """ Класс для создания клавиатуры для бота (https://vk.ru/dev/bots_docs_3)
     :param one_time: Если True, клавиатура исчезнет после нажатия на кнопку
     :type one_time: bool
     """

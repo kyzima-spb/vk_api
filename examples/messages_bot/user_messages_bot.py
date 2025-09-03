@@ -13,7 +13,7 @@ def main():
 
     # Авторизация пользователя:
     """
-    login, password = 'python@vk.com', 'mypassword'
+    login, password = 'python@vk.ru', 'mypassword'
     vk_session = vk_api.VkApi(login, password)
 
     try:
